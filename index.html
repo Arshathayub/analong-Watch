@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Running Analog Clock</title>
+<style>
+    body {
+      background-color: rgb(0, 255, 238);
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+
+    #clock {
+        width: 340px;
+        height: 340px;
+        box-shadow:  3px 3px 3px rgb(0, 0, 0);
+        inset: 3px 3px 3px rgb(0, 0, 0) ;
+        border: 18px solid #ffffff;
+        background-color: rgb(0, 255, 242);
+        border-radius: 50%;
+        position: relative;x    
+
+    }
+
+    .hand {
+        position: absolute; 
+        width:50%;
+        height:8px; 
+        background-color: #333;
+        top: 48%;
+        transform-origin: 100%;
+        
+       
+    }
+
+    #hour-hand {
+        width: 50%;
+        background-color: black;
+
+    }
+
+    #minute-hand {
+        min-width: 30%;
+        background-color: black;
+    }
+
+    #second-hand {
+        min-width: 50%;
+        background-color: rgb(228, 14, 14);
+    }
+</style>
+</head>
+<body>
+<div id="clock">
+    <div id="hour-hand" class="hand"></div>
+    <div id="minute-hand" class="hand"></div>
+    <div id="second-hand" class="hand"></div>
+</div>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const seconds = now.getSeconds();
+        const milliseconds = now.getMilliseconds();
+
+        const hourDegree = (hours % 12) * 30 + minutes * 0.2;
+        const minuteDegree = minutes * 6 + seconds * 0.1;
+        const secondDegree = seconds * 6 + milliseconds * 0.0003;
+
+        document.getElementById('hour-hand').style.transform = `rotate(${hourDegree}deg)`;
+        document.getElementById('minute-hand').style.transform = `rotate(${minuteDegree}deg)`;
+        document.getElementById('second-hand').style.transform = `rotate(${secondDegree}deg)`;
+    }
+
+    setInterval(updateClock, 10); 
+    updateClock(); 
+    </script>
+</body>
+</html>
